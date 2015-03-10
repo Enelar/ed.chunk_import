@@ -1,3 +1,6 @@
 [submodule "MCModify"]
 	path = MCModify
 	url = https://github.com/Enelar/MCModify
+[submodule "ed"]
+	path = ed
+	url = https://github.com/Enelar/ed
