@@ -1,0 +1,3 @@
+[submodule "MCModify"]
+	path = MCModify
+	url = https://github.com/Enelar/MCModify
