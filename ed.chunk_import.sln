@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.22310.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ed.chunk_import", "ed.chunk_import\ed.chunk_import.vcxproj", "{3E8F342C-F94D-4DFD-B42D-CB10BD5D02BD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ed", "..\ed.minecraft\ed\ed\ed.vcxproj", "{F5C3461B-4886-4721-9ACF-8F84B915C347}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "3party", "3party\3party.vcxproj", "{6550F806-EA3C-4720-8F0D-7B3311260CD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E8F342C-F94D-4DFD-B42D-CB10BD5D02BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3E8F342C-F94D-4DFD-B42D-CB10BD5D02BD}.Debug|Win32.Build.0 = Debug|Win32
+		{3E8F342C-F94D-4DFD-B42D-CB10BD5D02BD}.Release|Win32.ActiveCfg = Release|Win32
+		{3E8F342C-F94D-4DFD-B42D-CB10BD5D02BD}.Release|Win32.Build.0 = Release|Win32
+		{F5C3461B-4886-4721-9ACF-8F84B915C347}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F5C3461B-4886-4721-9ACF-8F84B915C347}.Debug|Win32.Build.0 = Debug|Win32
+		{F5C3461B-4886-4721-9ACF-8F84B915C347}.Release|Win32.ActiveCfg = Release|Win32
+		{F5C3461B-4886-4721-9ACF-8F84B915C347}.Release|Win32.Build.0 = Release|Win32
+		{6550F806-EA3C-4720-8F0D-7B3311260CD9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6550F806-EA3C-4720-8F0D-7B3311260CD9}.Debug|Win32.Build.0 = Debug|Win32
+		{6550F806-EA3C-4720-8F0D-7B3311260CD9}.Release|Win32.ActiveCfg = Release|Win32
+		{6550F806-EA3C-4720-8F0D-7B3311260CD9}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
