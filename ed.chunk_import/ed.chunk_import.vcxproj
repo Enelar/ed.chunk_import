@@ -43,14 +43,14 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\build\$(SolutionName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\int\$(SolutionName)\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>./../ed;C:/boost;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>./..;./../ed;C:/boost;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>C:/boost/stage/lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\build\$(SolutionName)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)..\int\$(SolutionName)\$(ProjectName)\$(Configuration)\</IntDir>
-    <IncludePath>./../ed;C:/boost;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <IncludePath>./..;./../ed;C:/boost;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
     <LibraryPath>C:/boost/stage/lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -84,6 +84,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ed.minecraft\ed\ed\ed.vcxproj">
+      <Project>{f5c3461b-4886-4721-9acf-8f84b915c347}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\3party\3party.vcxproj">
+      <Project>{6550f806-ea3c-4720-8f0d-7b3311260cd9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
