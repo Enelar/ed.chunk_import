@@ -67,6 +67,7 @@ anvil::chunkT anvil::Read(int id)
 
   std::stringstream decompressed;
   {
+
     boost::iostreams::filtering_istreambuf fis;
     switch (compression)
     {
@@ -80,8 +81,13 @@ anvil::chunkT anvil::Read(int id)
       throw "compression not supported";
     }
 
-    fis.push(file);
-    boost::iostreams::copy(fis, decompressed);
+    {
+      stringstream compressed;
+      copy_n(istreambuf_iterator<char>(file), size, ostreambuf_iterator<char>(compressed));
+
+      fis.push(compressed);
+      boost::iostreams::copy(fis, decompressed, size);
+    }
     decompressed.seekg(std::ios::beg);
   }
 

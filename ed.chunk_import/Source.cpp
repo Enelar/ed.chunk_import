@@ -1,39 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <string>
-#include <limits>
-#include <exception>
-
-#include <MCModify\include\NamedBinaryTag.hpp>
-
-#include <boost/iostreams/filtering_streambuf.hpp>
-#include <boost/iostreams/filter/gzip.hpp>
-#include <boost/iostreams/copy.hpp>
-
-using namespace NBT;
-
 #include "anvil.h"
-
-#if 0
-auto TestRead(std::string filename)
-{
-  std::stringstream decompressed;
-  {
-    std::ifstream compressed(filename, std::ios::in | std::ios::binary);
-    if (!compressed)
-      throw "exception";
-    boost::iostreams::filtering_istreambuf fis;
-    //fis.push(boost::iostreams::gzip_decompressor());
-    fis.push(compressed);
-    boost::iostreams::copy(fis, decompressed);
-    decompressed.seekg(std::ios::beg);
-  }
-
-  auto nbt = NBT::Tag::read(decompressed);
-  return nbt;
-}
-#endif
+#include "convert.h"
 
 auto main()
 {
@@ -41,6 +7,7 @@ auto main()
 
   for (auto id : test.Present())
   {
-    auto chunk = test.Read(id);
+    auto their_chunk = test.Read(id);
+    auto our_chunk = Convert(their_chunk);
   }
 }
