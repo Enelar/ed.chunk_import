@@ -13,6 +13,9 @@
 
 using namespace NBT;
 
+#include "anvil.h"
+
+#if 0
 auto TestRead(std::string filename)
 {
   std::stringstream decompressed;
@@ -21,7 +24,7 @@ auto TestRead(std::string filename)
     if (!compressed)
       throw "exception";
     boost::iostreams::filtering_istreambuf fis;
-    fis.push(boost::iostreams::gzip_decompressor());
+    //fis.push(boost::iostreams::gzip_decompressor());
     fis.push(compressed);
     boost::iostreams::copy(fis, decompressed);
     decompressed.seekg(std::ios::beg);
@@ -30,8 +33,14 @@ auto TestRead(std::string filename)
   auto nbt = NBT::Tag::read(decompressed);
   return nbt;
 }
+#endif
 
 auto main()
 {
-  auto test = TestRead("../level.in.dat");
+  anvil test("../r.0.0.mca");
+
+  for (auto id : test.Present())
+  {
+    auto chunk = test.Read(id);
+  }
 }
