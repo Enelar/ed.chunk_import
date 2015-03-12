@@ -4,3 +4,6 @@
 [submodule "ed"]
 	path = ed
 	url = https://github.com/Enelar/ed
+[submodule "ed.game_headers"]
+	path = ed.game_headers
+	url = https://github.com/Enelar/ed.game_headers
