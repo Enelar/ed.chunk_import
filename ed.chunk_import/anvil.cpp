@@ -63,7 +63,7 @@ anvil::chunkT anvil::Read(int id)
   {
     GZIP = 1,
     ZLIB = 2
-  } compression = (_comp)ReadBigEndian(4, file);
+  } compression = (_comp)ReadBigEndian(1, file);
 
   std::stringstream decompressed;
   {
@@ -96,7 +96,7 @@ std::pair<int, int> anvil::ChunkLocation(int id)
   file.seekg(id * location_size, ios_base::beg);
   auto
     location = ReadBigEndian(3, file),
-    size = ReadBigEndian(3, file);
+    size = ReadBigEndian(1, file);
   return{ location, size };
 }
 
