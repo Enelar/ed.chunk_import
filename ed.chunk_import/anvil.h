@@ -12,7 +12,10 @@ struct anvil
 
   typedef decltype(NBT::Tag::read(declval<iostream &>())) chunkT;
 
-  chunkT Read(int x_coordinate, int y_coordinate);
+  chunkT Read(int x_coordinate, int z_coordinate);
   chunkT Read(int id);
   vector<int> Present();
+
+private:
+  std::pair<int, int> ChunkLocation(int id);
 };

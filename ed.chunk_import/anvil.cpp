@@ -1,6 +1,13 @@
 #include "anvil.h"
 #include <algorithm>
 
+
+#include <boost/iostreams/filtering_streambuf.hpp>
+#include <boost/iostreams/filter/gzip.hpp>
+#include <boost/iostreams/copy.hpp>
+#include <sstream>
+#include <string>
+
 namespace
 {
   // http://minecraft.gamepedia.com/Region_file_format
@@ -10,21 +17,87 @@ namespace
   const int location_size = 6;
 }
 
+namespace
+{
+  int ReadBigEndian(int size, istream &it)
+  {
+    int ret = 0;
+    for (int i = 0; i < size; i++)
+    {
+      ret <<= 8;
+      char ch;
+      it.get(ch);
+      ret += (unsigned char)ch;
+    }
+    return ret;
+  }
+}
+
+
 anvil::anvil(string filename)
   : file(filename, std::ios::in | std::ios::binary)
 {
 
 }
 
-anvil::chunkT anvil::Read(int x_coordinate, int y_coordinate)
-{
-  return{};
+anvil::chunkT anvil::Read(int x_coordinate, int z_coordinate)
+{ // http://minecraft.gamepedia.com/Region_file_format#Structure
+  int loc[] = { x_coordinate % 32, z_coordinate % 32 };
+  for (auto &a : loc)
+    if (a < 0)
+      a += 32;
+  for (auto a : loc)
+    if (a < 0 || a > 31)
+      throw "wow, error in coordinates";
+  auto id = 4 * (loc[0] + loc[1] * 32);
+  return Read(id);
 }
 
 
 anvil::chunkT anvil::Read(int id)
 {
-  return{};
+  auto chunk_location = ChunkLocation(id);
+  file.seekg(chunk_location.first * block_size, ios_base::beg);
+  int size = ReadBigEndian(4, file);
+  enum _comp
+  {
+    GZIP = 1,
+    ZLIB = 2
+  } compression = (_comp)ReadBigEndian(4, file);
+
+  std::stringstream decompressed;
+  {
+    boost::iostreams::filtering_istreambuf fis;
+    switch (compression)
+    {
+    case GZIP:
+      fis.push(boost::iostreams::gzip_decompressor());
+      break;
+    case ZLIB:
+      fis.push(boost::iostreams::zlib_decompressor());
+      break;
+    default:
+      throw "compression not supported";
+    }
+
+    fis.push(file);
+    boost::iostreams::copy(fis, decompressed);
+    decompressed.seekg(std::ios::beg);
+  }
+
+  auto nbt = NBT::Tag::read(decompressed);
+  return nbt;
+}
+
+std::pair<int, int> anvil::ChunkLocation(int id)
+{
+  if (id < 0 || id > 1023)
+    throw "wow, id out of range";
+  file.seekg(id * location_size, ios_base::beg);
+  auto
+    location = ReadBigEndian(3, file),
+    size = ReadBigEndian(3, file);
+  return{ location, size };
 }
 
 namespace
